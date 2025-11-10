@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import locationRoutes from "./routes/locationRoutes.js";
+import payWithRewardRoutes from "./routes/payWithRewardRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -19,7 +20,7 @@ app.use(express.json());
 
 // ✅ MongoDB connection
 connectDB();
-
+payWithRewardRoutes
 // ✅ Test route
 app.get("/", (req, res) => {
   res.send("Dotcom backend is live 🚀");
@@ -27,7 +28,7 @@ app.get("/", (req, res) => {
 
 // ✅ API routes
 app.use("/api/location", locationRoutes);
-
+app.use("/api/payWithReward", payWithRewardRoutes);
 // ✅ Start server
 const PORT = process.env.PORT || 7000;
 app.listen(PORT, () => {
