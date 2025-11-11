@@ -3,17 +3,17 @@ import payWithReward from "../models/payWithRewardModels.js";
 // Save payment details to MongoDB
 export const savePaymentDetail = async (req, res) => {
   try {
-    const { name, email, amount } = req.body;
+    const { name, mobile, amount } = req.body;
 
     // Validate data
-    if (!name || !email || !amount) {
+    if (!name || !mobile || !amount) {
       return res.status(400).json({ message: "All fields are required." });
     }
 
     // Create new payment entry
     const newPayment = new payWithReward({
       name,
-      email,
+      mobile,
       amount,
     });
 

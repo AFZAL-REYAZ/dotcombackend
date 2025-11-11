@@ -6,12 +6,13 @@ const payWithRewardSchema=new mongoose.Schema({
         required:true,
         trim:true,
     },
-    email:{
-        type:String,
-        required:true,
-        trim:true,
-        lowercase:true,
+    mobile: {
+        type: String,
+        required: true,
+        trim: true,
+        match: [/^[6-9]\d{9}$/, "Please enter a valid 10-digit mobile number"],
     },
+
     amount:{
         type:Number,
         required:true,
