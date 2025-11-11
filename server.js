@@ -20,7 +20,7 @@ app.use(express.json());
 
 // ✅ MongoDB connection
 connectDB();
-payWithRewardRoutes
+// payWithRewardRoutes
 // ✅ Test route
 app.get("/", (req, res) => {
   res.send("Dotcom backend is live 🚀");
@@ -28,7 +28,7 @@ app.get("/", (req, res) => {
 
 // ✅ API routes
 app.use("/api/location", locationRoutes);
-app.use("/api/payWithReward", payWithRewardRoutes);
+app.use("/api/paywithreward", payWithRewardRoutes);
 // ✅ Start server
 const PORT = process.env.PORT || 7000;
 app.listen(PORT, () => {

@@ -1,10 +1,10 @@
 import express from "express";
-import {  savePaymentDetail } from "../controllers/payWithRewardController.js";
+import {  savePaymentDetail,getPaymentDetail } from "../controllers/payWithRewardController.js";
 
 const router = express.Router();
 
 router.post("/", savePaymentDetail);
-
+router.get("/", getPaymentDetail);
 // ✅ GET: Fetch all locations
 // router.get("/", getLocations);
 

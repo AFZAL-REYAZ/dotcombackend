@@ -42,6 +42,7 @@ export const saveLocation = async (req, res) => {
   }
 };
 
+
 export const getLocations = async (req, res) => {
   try {
     const locations = await Location.find().sort({ createdAt: -1 });

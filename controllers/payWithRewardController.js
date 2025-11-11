@@ -32,4 +32,24 @@ export const savePaymentDetail = async (req, res) => {
   }
 };
 
+export const getPaymentDetail=async(req,res)=>{
+    try{
+       const allPayRewardData =  await payWithReward.find();
+       if(!allPayRewardData || !allPayRewardData===0){
+        return res.status(404).json({message:"no payment record found"})
+        // alert("problem related  ")
+       }
+       res.status(200).json({
+        message:"payment record fetched successfully",
+        data:allPayRewardData
+       })
+    }catch(error){
+        console.log('====================================');
+        console.log(error);
+        console.log('====================================');
+    }
+}
+
+
+
 
