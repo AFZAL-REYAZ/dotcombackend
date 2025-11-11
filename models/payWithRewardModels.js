@@ -18,7 +18,11 @@ const payWithRewardSchema=new mongoose.Schema({
         required:true,
         min:1,
     },
-    
+    rewardCoins: {
+        type: Number,
+        default: 1,
+    },
+
 },
     { timestamps: true } 
 )
