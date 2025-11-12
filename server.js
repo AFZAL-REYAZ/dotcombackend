@@ -8,40 +8,42 @@ import payWithRewardRoutes from "./routes/payWithRewardRoutes.js";
 dotenv.config();
 const app = express();
 
+// ✅ FULL CORS CONFIG
 app.use(cors({
   origin: [
     "http://localhost:5173",
     "https://dotcomfrontend.onrender.com",
-    "http://dotcomgadgets.in",
-    "https://dotcomgadgets.in",
-    "https://www.dotcomgadgets.in"
+    "http://dotcomgadgets.in",      // Added HTTP
+    "https://dotcomgadgets.in",     // HTTPS
+    "http://www.dotcomgadgets.in",  // Added HTTP www
+    "https://www.dotcomgadgets.in"  // HTTPS www
   ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true
+  credentials: true,
 }));
 
-// ✅ Handle all preflight OPTIONS requests
-  app.options("*", cors());
+// ✅ Handle preflight requests
+app.options("*", cors());
 
-// ✅ JSON body parser
+// ✅ Middleware
 app.use(express.json());
 
-// ✅ MongoDB connection
+// ✅ Connect to MongoDB
 connectDB();
-// payWithRewardRoutes
-// ✅ Test route
+
+// ✅ Routes
 app.get("/", (req, res) => {
   res.send("Dotcom backend is live 🚀");
 });
 
-// ✅ API routes
 app.use("/api/location", locationRoutes);
 app.use("/api/paywithreward", payWithRewardRoutes);
-// ✅ Start server
+
+// ✅ Start Server
 const PORT = process.env.PORT || 7000;
 app.listen(PORT, () => {
   console.log("====================================");
-  console.log(`App is running on ${PORT}`);
+  console.log(`✅ App running on port ${PORT}`);
   console.log("====================================");
 });
