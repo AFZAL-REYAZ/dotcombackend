@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/db.js";
 import locationRoutes from "./routes/locationRoutes.js";
 import payWithRewardRoutes from "./routes/payWithRewardRoutes.js";
+import userRoutes from "./routes/userRoutes.js"
 
 dotenv.config();
 const app = express();
@@ -24,7 +25,8 @@ app.use(cors({
 }));
 
 // ✅ Handle preflight requests
-app.options("*", cors());
+  app.use(cors());
+
 
 // ✅ Middleware
 app.use(express.json());
@@ -39,6 +41,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/location", locationRoutes);
 app.use("/api/paywithreward", payWithRewardRoutes);
+app.use("/api/useroutes",userRoutes);
 
 // ✅ Start Server
 const PORT = process.env.PORT || 7000;
