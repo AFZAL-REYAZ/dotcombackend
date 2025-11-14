@@ -99,6 +99,31 @@ export const allUser = async (req, res) => {
   }
 };
 
+export const updateUserRole = async (req, res) => {
+  try {
+    const { userId, role } = req.body;
+
+    if (!["user", "admin"].includes(role)) {
+      return res.status(400).json({ message: "Invalid role" });
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      { role },
+      { new: true }
+    ).select("-password");
+
+    return res.status(200).json({
+      message: "Role updated successfully",
+      updatedUser
+    });
+
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "Server error while updating role" });
+  }
+};
+
 
 
 
