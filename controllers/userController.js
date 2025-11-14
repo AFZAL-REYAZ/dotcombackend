@@ -85,3 +85,19 @@ export const login = async (req, res) => {
 };
 
 
+export const allUser = async (req, res) => {
+  try {
+    const users = await User.find()
+      .select("-password")
+      .sort({ createdAt: -1 }); // DESC order
+
+    return res.status(200).json({ users });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "Unable to fetch user data" });
+  }
+};
+
+
+
+
