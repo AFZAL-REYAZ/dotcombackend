@@ -124,6 +124,50 @@ export const updateUserRole = async (req, res) => {
   }
 };
 
+export const updateProfile = async (req, res) => {
+  try {
+    const { name, email } = req.body;
+
+    if (!name || !email) {
+      return res.status(400).json({ message: "Name and Email required" });
+    }
+
+    // Email cannot conflict with another user
+    const existingEmail = await User.findOne({
+      email,
+      _id: { $ne: req.user._id },
+    });
+
+    if (existingEmail) {
+      return res.status(400).json({ message: "Email already in use by another user" });
+    }
+
+    const updateData = { name, email };
+
+    // If a new avatar is uploaded (multer adds file)
+    if (req.file) {
+      const serverUrl =
+        process.env.SERVER_URL || `${req.protocol}://${req.get("host")}`;
+
+      updateData.avatar = `${serverUrl}/uploads/avatars/${req.file.filename}`;
+    }
+
+    // Update in database
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user._id,
+      updateData,
+      { new: true }
+    ).select("-password");
+
+    return res.status(200).json({
+      message: "Profile updated successfully",
+      updatedUser,
+    });
+  } catch (err) {
+    console.error("Profile Update Error:", err);
+    return res.status(500).json({ message: "Failed to update profile" });
+  }
+};
 
 
 

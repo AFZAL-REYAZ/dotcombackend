@@ -22,7 +22,11 @@ const userDetails= new mongoose.Schema({
       type: String,
       enum: ["user", "admin"],
       default: "user",  // everyone becomes USER by default
-    }
+    },
+    avatar: { 
+        type: String,
+        default: "",
+     }
 },
 {
     timestamps:true
