@@ -124,8 +124,14 @@ export const updateUserRole = async (req, res) => {
   }
 };
 
+
 export const updateProfile = async (req, res) => {
   try {
+    console.log("---- UPDATE PROFILE HIT ----");
+console.log("REQ.USER:", req.user);
+console.log("REQ.FILE:", req.file);
+console.log("REQ.BODY:", req.body);
+
     const { name, email } = req.body;
 
     if (!name || !email) {
@@ -168,6 +174,7 @@ export const updateProfile = async (req, res) => {
     return res.status(500).json({ message: "Failed to update profile" });
   }
 };
+
 
 
 

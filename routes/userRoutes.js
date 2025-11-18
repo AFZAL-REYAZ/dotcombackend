@@ -10,7 +10,7 @@ router.post("/signup",signup);
 router.post("/login",login);
 router.get("/allUser",allUser);
 router.put("/update-role",authMiddleware,checkAdmin,updateUserRole);
-router.put("/update-profile", authMiddleware, updateProfile);
+// router.put("/update-profile", authMiddleware, updateProfile);
 router.put("/update-profile", authMiddleware, uploadAvatar.single("avatar"), updateProfile);
 
 export default router;
