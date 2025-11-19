@@ -1,30 +1,33 @@
 import mongoose from "mongoose";
 
-const payWithRewardSchema=new mongoose.Schema({
-    name:{
-        type:String,
-        required:true,
-        trim:true,
+const payWithRewardSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+      trim: true,
     },
+
     email: {
-        type: String,
-        required: true,
-        trim: true,
-        match: [/^\S+@\S+\.\S+$/, "Please enter a valid email"],
+      type: String,
+      required: true,
+      trim: true,
+      match: [/^\S+@\S+\.\S+$/, "Please enter a valid email"],
     },
-    amount:{
-        type:Number,
-        required:true,
-        min:1,
+
+    amount: {
+      type: Number,
+      required: true,
+      min: 1,
     },
+
     rewardCoins: {
-        type: Number,
-        default: 0,
+      type: Number,
+      default: 0,   // optional, will be 0 if not provided
     },
+  },
+  { timestamps: true }
+);
 
-},
-    { timestamps: true } 
-)
-
-const payWithReward=mongoose.model("payWithReward",payWithRewardSchema);
+const payWithReward = mongoose.model("payWithReward", payWithRewardSchema);
 export default payWithReward;

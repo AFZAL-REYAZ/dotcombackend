@@ -10,12 +10,6 @@ export const savePaymentDetail = async (req, res) => {
       return res.status(400).json({ message: "All fields are required." });
     }
 
-    // Validate mobile format (extra safety)
-    const mobileRegex = /^[6-9]\d{9}$/;
-    if (!mobileRegex.test(mobile)) {
-      return res.status(400).json({ message: "Invalid mobile number format" });
-    }
-
     // Convert amount safely
     const numericAmount = Number(amount);
     if (isNaN(numericAmount) || numericAmount <= 0) {
@@ -27,7 +21,7 @@ export const savePaymentDetail = async (req, res) => {
       name,
       email,
       amount: numericAmount,
-      rewardCoins: rewardCoins || 0, // default to 0 if not provided
+      rewardCoins: rewardCoins || 0,
     });
 
     // Save to database
@@ -49,10 +43,6 @@ export const savePaymentDetail = async (req, res) => {
 export const getPaymentDetail = async (req, res) => {
   try {
     const allPayRewardData = await payWithReward.find().sort({ createdAt: -1 });
-
-    if (!allPayRewardData || allPayRewardData.length === 0) {
-      return res.status(404).json({ message: "No payment records found" });
-    }
 
     res.status(200).json({
       message: "✅ Payment record fetched successfully",
