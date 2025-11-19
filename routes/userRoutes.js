@@ -12,5 +12,6 @@ router.get("/allUser",allUser);
 router.put("/update-role",authMiddleware,checkAdmin,updateUserRole);
 // router.put("/update-profile", authMiddleware, updateProfile);
 router.put("/update-profile", authMiddleware, uploadAvatar.single("avatar"), updateProfile);
+router.get("/me", authMiddleware, getMyProfile);
 
 export default router;
