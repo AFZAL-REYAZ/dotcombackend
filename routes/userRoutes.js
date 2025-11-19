@@ -1,4 +1,4 @@
-import { signup,login,allUser,updateUserRole,updateProfile } from "../controllers/userController.js";
+import { signup,login,allUser,updateUserRole,updateProfile, getMyProfile } from "../controllers/userController.js";
 import express from "express";
 import { authMiddleware } from "../middleware/auth.js";
 import { checkAdmin } from "../middleware/checkAdmin.js";
