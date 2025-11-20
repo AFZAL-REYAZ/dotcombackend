@@ -29,9 +29,13 @@ export const signup = async (req, res) => {
     });
 
   } catch (err) {
-    console.error("Signup error:", err);
-    return res.status(500).json({ message: "Server Error" });
-  }
+  console.error("🔥 Signup Error:", err);  // FULL ERROR LOG
+  return res.status(500).json({
+    message: "Signup failed",
+    error: err.message,       // send real error
+  });
+}
+
 };
 
 
