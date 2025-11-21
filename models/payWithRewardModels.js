@@ -8,11 +8,11 @@ const payWithRewardSchema = new mongoose.Schema(
       trim: true,
     },
 
-    email: {
+    mobile: {
       type: String,
       required: true,
       trim: true,
-      match: [/^\S+@\S+\.\S+$/, "Please enter a valid email"],
+      match: [/^[6-9]\d{9}$/, "Invalid mobile number"], // Indian mobile validation
     },
 
     amount: {
@@ -23,7 +23,7 @@ const payWithRewardSchema = new mongoose.Schema(
 
     rewardCoins: {
       type: Number,
-      default: 0,   // optional, will be 0 if not provided
+      default: 0,  // Calculated in frontend or backend
     },
   },
   { timestamps: true }
