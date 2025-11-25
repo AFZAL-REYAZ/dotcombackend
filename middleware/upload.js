@@ -1,10 +1,16 @@
 import multer from "multer";
 import path from "path";
+import fs from "fs";
 
-// Storage settings
+// Ensure uploads/products exists
+const uploadPath = path.join(process.cwd(), "uploads/products");
+if (!fs.existsSync(uploadPath)) {
+  fs.mkdirSync(uploadPath, { recursive: true });
+}
+
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "uploads/products/");
+    cb(null, uploadPath);
   },
   filename: function (req, file, cb) {
     const unique = Date.now() + "-" + Math.round(Math.random() * 1e9);
@@ -12,7 +18,6 @@ const storage = multer.diskStorage({
   },
 });
 
-// File filter
 const fileFilter = (req, file, cb) => {
   const allowed = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
   if (allowed.includes(file.mimetype)) cb(null, true);
