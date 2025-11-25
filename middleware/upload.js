@@ -3,7 +3,7 @@ import path from "path";
 import fs from "fs";
 
 // Ensure uploads/products exists
-const uploadPath = path.join(process.cwd(), "uploads/products");
+const uploadPath = path.join(process.cwd(), "backend/uploads/products");
 if (!fs.existsSync(uploadPath)) {
   fs.mkdirSync(uploadPath, { recursive: true });
 }
