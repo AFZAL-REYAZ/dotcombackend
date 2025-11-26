@@ -3,6 +3,8 @@ import { v2 as cloudinary } from "cloudinary";
 
 export const addProduct = async (req, res) => {
   try {
+    console.log("REQ.FILE →", req.file);
+
     const { name, price, category, description } = req.body;
 
     if (!req.file) {
