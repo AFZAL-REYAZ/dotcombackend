@@ -10,7 +10,11 @@ import {
 const router = express.Router();
 
 // Add product (with image)
-router.post("/add", upload.single("image"), addProduct);
+router.post("/add", (req, res, next) => {
+    console.log("➡ HIT /api/products/add route");
+    next();
+}, upload.single("image"), addProduct);
+
 
 // All products
 router.get("/", getAllProducts);

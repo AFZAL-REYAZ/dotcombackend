@@ -1,9 +1,10 @@
 import Product from "../models/productModel.js";
 import { v2 as cloudinary } from "cloudinary";
 
+
 export const addProduct = async (req, res) => {
   try {
-    console.log("REQ.FILE →", req.file);  // <=== MUST PRINT
+    console.log("REQ.FILE →", req.file);  // Debug log
 
     if (!req.file) {
       return res.status(400).json({ message: "Image not received" });
@@ -16,14 +17,14 @@ export const addProduct = async (req, res) => {
       price,
       category,
       description,
-      image: req.file.path,       // Cloudinary URL
-      public_id: req.file.filename,
+      image: req.file.secure_url,       // ⭐ Cloudinary URL
+      public_id: req.file.public_id,    // ⭐ Cloudinary public ID
     });
 
     await product.save();
 
     res.status(201).json({
-      message: "Product added",
+      message: "Product added successfully",
       product,
     });
 
@@ -32,6 +33,7 @@ export const addProduct = async (req, res) => {
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
+
 
 
 
