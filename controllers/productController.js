@@ -1,32 +1,37 @@
 import Product from "../models/productModel.js";
-import { v2 as cloudinary } from "cloudinary";
-
 
 export const addProduct = async (req, res) => {
   try {
-    console.log("REQ.FILE →", req.file);  // Debug log
+    console.log("REQ.BODY →", req.body);
+    console.log("REQ.FILES →", req.files);
 
-    if (!req.file || req.file.length === 0) {
+    if (!req.files || req.files.length === 0) {
       return res.status(400).json({ message: "At least one image is required" });
     }
 
     const { name, price, category, description } = req.body;
+
     if (!name || !price || !category) {
       return res.status(400).json({ message: "All fields required" });
     }
+
+    // ✅ Store array of cloudinary URLs
+    const imageUrls = req.files.map(file => file.path);
+    const publicIds = req.files.map(file => file.filename);
+
     const product = new Product({
       name,
       price,
       category,
       description,
-      images: req.file.path,
-      public_id: req.file.filename,
+      image: imageUrls,        // ✅ ARRAY
+      public_id: publicIds,    // ✅ ARRAY
     });
 
     await product.save();
 
     res.status(201).json({
-      message: "Product added successfully",
+      message: "✅ Product added successfully",
       product,
     });
 
@@ -35,6 +40,7 @@ export const addProduct = async (req, res) => {
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };
+
 
 
 
