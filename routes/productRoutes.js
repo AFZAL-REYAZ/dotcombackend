@@ -10,10 +10,8 @@ import {
 const router = express.Router();
 
 // Add product (with image)
-router.post("/add", (req, res, next) => {
-    console.log("➡ HIT /api/products/add route");
-    next();
-}, upload.array("images", 5), addProduct);
+router.post("/add", upload.array("image", 5), addProduct);
+
 
 
 // All products

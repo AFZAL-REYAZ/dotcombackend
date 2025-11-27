@@ -19,7 +19,6 @@ export const addProduct = async (req, res) => {
       price,
       category,
       description,
-      // multer-storage-cloudinary provides `path` (URL) and `filename` (public_id)
       images: req.file.path,
       public_id: req.file.filename,
     });
