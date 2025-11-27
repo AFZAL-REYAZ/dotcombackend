@@ -1,15 +1,12 @@
+import 'dotenv/config';
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
-import path from "path";
 import connectDB from "./config/db.js";
 import locationRoutes from "./routes/locationRoutes.js";
 import payWithRewardRoutes from "./routes/payWithRewardRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 
-
-dotenv.config();
 const app = express();
 
 // ✅ FULL CORS CONFIG
@@ -30,10 +27,6 @@ app.use(cors({
 // Middleware
 app.use(express.json());
 
-// ⭐ HERE — Serve uploads folder
-// app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
-// app.use("/uploads", express.static(path.join(process.cwd(), "backend/uploads")));
-
 
 // Connect DB
 connectDB();
@@ -47,7 +40,7 @@ app.use("/api/location", locationRoutes);
 app.use("/api/paywithreward", payWithRewardRoutes);
 app.use("/api/useroutes", userRoutes);
 
-app.use("/uploads", express.static("uploads"));
+// app.use("/uploads", express.static("uploads"));
 app.use("/api/products", productRoutes);
 
 // Start Server
@@ -57,3 +50,9 @@ app.listen(PORT, () => {
   console.log(`✅ App running on port ${PORT}`);
   console.log("====================================");
 });
+
+
+
+
+
+
