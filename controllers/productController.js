@@ -6,19 +6,21 @@ export const addProduct = async (req, res) => {
   try {
     console.log("REQ.FILE →", req.file);  // Debug log
 
-    if (!req.file) {
-      return res.status(400).json({ message: "Image not received" });
+    if (!req.files || req.files.length === 0) {
+      return res.status(400).json({ message: "At least one image is required" });
     }
 
     const { name, price, category, description } = req.body;
-
+    if (!name || !price || !category) {
+      return res.status(400).json({ message: "All fields required" });
+    }
     const product = new Product({
       name,
       price,
       category,
       description,
       // multer-storage-cloudinary provides `path` (URL) and `filename` (public_id)
-      image: req.file.path,
+      images: req.file.path,
       public_id: req.file.filename,
     });
 

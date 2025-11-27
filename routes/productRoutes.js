@@ -13,7 +13,7 @@ const router = express.Router();
 router.post("/add", (req, res, next) => {
     console.log("➡ HIT /api/products/add route");
     next();
-}, upload.single("image"), addProduct);
+}, upload.array("images", 5), addProduct);
 
 
 // All products
