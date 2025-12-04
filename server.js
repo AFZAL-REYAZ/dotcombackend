@@ -6,6 +6,7 @@ import locationRoutes from "./routes/locationRoutes.js";
 import payWithRewardRoutes from "./routes/payWithRewardRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
+import cartRoutes from "./routes/cartRoutes.js";
 
 const app = express();
 
@@ -42,7 +43,7 @@ app.use("/api/useroutes", userRoutes);
 
 // app.use("/uploads", express.static("uploads"));
 app.use("/api/products", productRoutes);
-
+app.use("/api/cart", cartRoutes);
 // Start Server
 const PORT = process.env.PORT || 7000;
 app.listen(PORT, () => {

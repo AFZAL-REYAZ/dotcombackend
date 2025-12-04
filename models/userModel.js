@@ -1,5 +1,38 @@
 import mongoose from "mongoose";
 
+/* =========================
+   ✅ CART ITEM SCHEMA
+========================= */
+const cartItemModel = new mongoose.Schema(
+  {
+    product: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Product",
+      required: true,
+    },
+
+    quantity: {
+      type: Number,
+      default: 1,
+      min: 1,
+    },
+
+    size: {
+      type: String,
+      default: "M",
+    },
+
+    priceAtThatTime: {
+      type: Number,   // ✅ protects from price change issues
+      required: true,
+    },
+  },
+  { _id: true }
+);
+
+/* =========================
+   ✅ USER SCHEMA
+========================= */
 const userDetails = new mongoose.Schema(
   {
     name: {
@@ -13,7 +46,7 @@ const userDetails = new mongoose.Schema(
       required: true,
       unique: true,
       trim: true,
-      match: [/^[6-9]\d{9}$/, "Invalid mobile number"], // Indian mobile validation
+      match: [/^[6-9]\d{9}$/, "Invalid mobile number"],
     },
 
     password: {
@@ -36,6 +69,12 @@ const userDetails = new mongoose.Schema(
     rewardCoins: {
       type: Number,
       default: 0,
+    },
+
+    // ✅ CLOUD CART (Flipkart Style)
+    cart: {
+      type: [cartItemModel],
+      default: [],
     },
   },
   {
